@@ -32,7 +32,7 @@ public class AuthenticationSuccessHandlerImpl implements
 	
 	@Resource
 	private UserService userService;
-	
+	//≤‚ ‘git .gitignore
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
