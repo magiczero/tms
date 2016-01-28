@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.yhp.tms.dao.UserDAO;
 import com.yhp.tms.modal.User;
-import com.yph.tms.service.UserService;
+import com.yhp.tms.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

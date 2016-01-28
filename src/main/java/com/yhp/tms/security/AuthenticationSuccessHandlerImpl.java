@@ -17,7 +17,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.util.StringUtils;
 
-import com.yph.tms.service.UserService;
+import com.yhp.tms.service.UserService;
 
 public class AuthenticationSuccessHandlerImpl implements
 		AuthenticationSuccessHandler, InitializingBean {
@@ -51,6 +51,8 @@ public class AuthenticationSuccessHandlerImpl implements
 		String ip = this.getIpAddress(request); 
 		//
 		logger.info("登录用户是：" + username);
+		
+		//User user = userService.getUserByUsername(username);
 		
 		System.out.println("登录用户是 "+username + "，IP地址是：" + ip);
 		

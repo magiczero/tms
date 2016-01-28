@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.yhp.tms.modal.User;
-import com.yph.tms.service.UserService;
+import com.yhp.tms.service.UserService;
 
 public class CustomUserDetailService implements UserDetailsService {
 
