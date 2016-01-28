@@ -31,7 +31,7 @@ public class CustomUserDetailService implements UserDetailsService {
 		if(user == null) {
 			throw new UsernameNotFoundException(messages.getMessage(
                     "User.notFound", new Object[] { username },
-                    "ÓÃ»§Ãû {0} ²»´æÔÚ"));
+                    "ç”¨æˆ·å {0} ä¸å­˜åœ¨"));
 		}
 		
 		Collection<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
