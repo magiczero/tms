@@ -32,13 +32,13 @@ public class AuthenticationSuccessHandlerImpl implements
 	
 	@Resource
 	private UserService userService;
-	//²âÊÔgit .gitignore
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
 		if(StringUtils.isEmpty(defaultTargetUrl)) {
-			logger.debug("Î´ÉèÖÃdefaultTargetUrlÊôĞÔ");
-			throw new Exception("±ØĞëÉèÖÃdefaultTargetUrlÊôĞÔ");
+			logger.debug("æœªè®¾ç½®defaultTargetUrlå±æ€§");
+			throw new Exception("å¿…é¡»è®¾ç½®defaultTargetUrlå±æ€§");
 		}
 	}
 
@@ -50,11 +50,11 @@ public class AuthenticationSuccessHandlerImpl implements
 		String username = ((User)authentication.getPrincipal()).getUsername();
 		String ip = this.getIpAddress(request); 
 		//
-		logger.info("µÇÂ¼ÓÃ»§ÊÇ£º" + username);
+		logger.info("ç™»å½•ç”¨æˆ·æ˜¯ï¼š" + username);
 		
 		//User user = userService.getUserByUsername(username);
 		
-		System.out.println("µÇÂ¼ÓÃ»§ÊÇ "+username + "£¬IPµØÖ·ÊÇ£º" + ip);
+		System.out.println("ç™»å½•ç”¨æˆ·æ˜¯  "+username + "ï¼ŒIPåœ°å€æ˜¯ï¼š" + ip);
 		
 		if(this.forwardToDestination){  
             logger.info("Login success,Forwarding to "+this.defaultTargetUrl);  
