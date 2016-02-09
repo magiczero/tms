@@ -16,7 +16,7 @@
 	  <http auto-config="false" use-expressions="true" access-denied-page="/403.jsp" authentication-manager-ref="authenticationManager" >
 	  	<intercept-url pattern="/logout" access="permitAll"/>
 	  	<intercept-url pattern="/admin.jsp" access="hasRole('ROLE_ADMIN')" />
-	  	<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+	  	<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 	  	<form-login login-page="/jsp/login.jsp"
 	  			 login-processing-url="/login" 
 	  			 username-parameter="username" 
@@ -30,7 +30,7 @@
 	  </http>
  	<!-- 认证成功后的处理类 -->
  	<beans:bean id="authenticationSuccessHandler" class="com.yhp.tms.security.AuthenticationSuccessHandlerImpl">
- 		<beans:property name="defaultTargetUrl" value="/WEB-INF/main.jsp"></beans:property>
+ 		<beans:property name="defaultTargetUrl" value="/main/"></beans:property>
  		<beans:property name="forwardToDestination" value="true"></beans:property>
  	</beans:bean>
  	

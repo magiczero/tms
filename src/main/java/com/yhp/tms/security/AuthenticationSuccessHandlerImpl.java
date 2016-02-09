@@ -1,6 +1,7 @@
 package com.yhp.tms.security;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -49,12 +50,16 @@ public class AuthenticationSuccessHandlerImpl implements
 		// TODO Auto-generated method stub
 		String username = ((User)authentication.getPrincipal()).getUsername();
 		String ip = this.getIpAddress(request); 
+		Date date = new Date();  
+		
+		com.yhp.tms.modal.User currentUser = userService.getUserByUsername(username);
+		
+		currentUser.setIp(ip);
+		currentUser.setLastTime(new java.sql.Timestamp(date.getTime()));
+		
+		userService.updateUser(currentUser);
 		//
-		logger.info("登录用户是：" + username);
-		
-		//User user = userService.getUserByUsername(username);
-		
-		System.out.println("登录用户是  "+username + "，IP地址是：" + ip);
+		logger.info("登录用户是：" + username + "，ip地址是：" + ip + "，登录时间：" + date);
 		
 		if(this.forwardToDestination){  
             logger.info("Login success,Forwarding to "+this.defaultTargetUrl);  

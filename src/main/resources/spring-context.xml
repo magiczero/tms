@@ -11,18 +11,10 @@
 		http://www.springframework.org/schema/tx            http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/mvc           http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-    <context:component-scan base-package="com.yhp.tms"/> <!-- Looking for annotations in code -->
+    <context:component-scan base-package="com.yhp.tms.dao"/> <!-- Looking for annotations in code -->
+    <context:component-scan base-package="com.yhp.tms.service"/>
+    <context:component-scan base-package="com.yhp.tms.security"/>
     <mvc:annotation-driven/> <!-- For @Valid and some else -->
-
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
-		up static resources in the ${webappRoot}/resources directory -->
-	<mvc:resources mapping="/resources/**" location="/resources/" />
-
-    <bean id="jspViewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:viewClass="org.springframework.web.servlet.view.JstlView"
-          p:prefix="/WEB-INF/jsp/"
-          p:suffix=".jsp"/>
 
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource"

@@ -1,11 +1,15 @@
 package com.yhp.tms.modal;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,12 +25,73 @@ public class User implements Serializable {
 	@GeneratedValue
 	private Integer id;
 	@Column(name="user_name")
-	private String username;
+	private String username;		//用户名
 	@Column
-	private String password;
+	private String password;		//密码
 	@Column(name="role_name")
-	private String role;
+	private String role;			//权限名
+	@Column(name="real_name")
+	private String realname;		//真实姓名
+	@Column
+	private String department;		//部门
+	@Column
+	private String duty;			//职务
+	@Column(name="insert_time")
+	private Date insertTime;	//创建时间
+	@Column(name="last_login_time")
+	private Timestamp lastTime;			//上次登录时间
+	@Column(name="last_login_ip")
+	private String ip;				//最后登录IP
+	@ManyToOne(targetEntity=Group.class)
+	@JoinColumn(name="group_id")
+	private Group group;			//所属机构，公司，部门等
 	
+	//删除标志
+	//private boolean delFlag;
+	
+	public Group getGroup() {
+		return group;
+	}
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+	public Date getInsertTime() {
+		return insertTime;
+	}
+	public void setInsertTime(Date insertTime) {
+		this.insertTime = insertTime;
+	}
+	public Timestamp getLastTime() {
+		return lastTime;
+	}
+	public void setLastTime(Timestamp lastTime) {
+		this.lastTime = lastTime;
+	}
+	
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public String getDuty() {
+		return duty;
+	}
+	public void setDuty(String duty) {
+		this.duty = duty;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getRealname() {
+		return realname;
+	}
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
 	public String getRole() {
 		return role;
 	}
