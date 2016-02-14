@@ -9,9 +9,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>欢迎登录后台管理系统</title>
-<link href="resources/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="resources/js/jquery.js"></script>
-<script src="resources/js/cloud.js" type="text/javascript"></script>
+<link href="<%=path %>/resources/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<%=path %>/resources/js/jquery.js"></script>
+<script src="<%=path %>/resources/js/cloud.js" type="text/javascript"></script>
 
 <script language="javascript">
 	$(function(){

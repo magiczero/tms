@@ -36,6 +36,13 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userDao.findAll();
 	}
+
+	@Override
+	@Transactional
+	public boolean saveUser(User user) {
+		// TODO Auto-generated method stub
+		return userDao.save(user);
+	}
 	
 	
 }

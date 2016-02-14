@@ -23,7 +23,7 @@
 	  			 password-parameter="password" 
 	  			 always-use-default-target="true" 
 	  			 authentication-success-handler-ref="authenticationSuccessHandler"/>
-	  	<logout logout-url="/logout" logout-success-url="/logoutSuccessful"
+	  	<logout logout-url="/logout" logout-success-url="/jsp/login.jsp"
            delete-cookies="JSESSIONID" invalidate-session="true" /> 
        <http-basic />
 	  	

@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name="sys_user")
 public class User implements Serializable {
@@ -27,6 +30,7 @@ public class User implements Serializable {
 	@Column(name="user_name")
 	private String username;		//用户名
 	@Column
+	@JsonIgnore
 	private String password;		//密码
 	@Column(name="role_name")
 	private String role;			//权限名
@@ -43,7 +47,7 @@ public class User implements Serializable {
 	@Column(name="last_login_ip")
 	private String ip;				//最后登录IP
 	@ManyToOne(targetEntity=Group.class)
-	@JoinColumn(name="group_id")
+	@JoinColumn(name="group_id", referencedColumnName="id")
 	private Group group;			//所属机构，公司，部门等
 	
 	//删除标志
@@ -86,12 +90,14 @@ public class User implements Serializable {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
+	@NotBlank(message="真实姓名必须填写")  
 	public String getRealname() {
 		return realname;
 	}
 	public void setRealname(String realname) {
 		this.realname = realname;
 	}
+	@NotBlank(message="角色必须填写")  
 	public String getRole() {
 		return role;
 	}
@@ -104,12 +110,14 @@ public class User implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	@NotBlank(message="用户名必须填写")  
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	@NotBlank(message="密码必须填写")  
 	public String getPassword() {
 		return password;
 	}

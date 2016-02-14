@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="sys_group")
@@ -26,7 +27,7 @@ public class Group implements Serializable {
 	 */
 	private static final long serialVersionUID = 6954390597814656693L;
 	
-	private int id;
+	private Integer id;
 	private String groupName;
 	private Group parentGroup;
 	private Set<Group> child = new HashSet<Group>();
@@ -44,14 +45,15 @@ public class Group implements Serializable {
 	}
 	@Id
 	@GeneratedValue
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
 	@Column(name="group_name")
+	@NotBlank
 	public String getGroupName() {
 		return groupName;
 	}
@@ -68,7 +70,9 @@ public class Group implements Serializable {
 		this.parentGroup = parentGroup;
 	}
 	
-	@OneToMany(targetEntity=Group.class)
+	//@OneToMany(targetEntity=Group.class)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parentGroup")  
+    @NotFound(action = NotFoundAction.IGNORE)
 	public Set<Group> getChild() {
 		return child;
 	}

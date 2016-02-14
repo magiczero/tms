@@ -11,4 +11,6 @@ public interface UserService {
 	boolean updateUser(User user);
 	
 	List<User> getAllUser();
+	
+	boolean saveUser(User user);
 }

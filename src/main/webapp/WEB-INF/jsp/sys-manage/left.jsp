@@ -37,10 +37,30 @@ $(function(){
         
     <dd>
     <div class="title">
+    <span><img src="${contextPath}/resources/images/leftico02.png" /></span>用户管理
+    </div>
+    	<ul class="menuson">
+        	<li class="active"><cite></cite><a href="${contextPath}/user/list" target="rightFrame">用户列表</a><i></i></li>
+        	<li><cite></cite><a href="${contextPath}/user/add" target="rightFrame">添加用户</a><i></i></li>
+       	</ul>     
+    </dd>
+    
+    <dd>
+    <div class="title">
+    <span><img src="${contextPath}/resources/images/leftico02.png" /></span>部门管理
+    </div>
+    	<ul class="menuson">
+        	<li><cite></cite><a href="${contextPath}/group/main" target="rightFrame">部门列表</a><i></i></li>
+        	<li><cite></cite><a href="${contextPath}/group/add" target="rightFrame">添加部门</a><i></i></li>
+       	</ul>     
+    </dd>
+        
+    <dd>
+    <div class="title">
     <span><img src="${contextPath}/resources/images/leftico01.png" /></span>数据字典
     </div>
     	<ul class="menuson">
-        <li><cite></cite><a href="index.html" target="rightFrame">首页模版</a><i></i></li>
+        <li><cite></cite><a href="${contextPath}/user/list" target="rightFrame">首页模版</a><i></i></li>
         <li><cite></cite><a href="right.html" target="rightFrame">数据列表</a><i></i></li>
         <li><cite></cite><a href="imgtable.html" target="rightFrame">图片数据表</a><i></i></li>
         <li><cite></cite><a href="form.html" target="rightFrame">添加编辑</a><i></i></li>
@@ -54,14 +74,7 @@ $(function(){
     </dd>
         
     
-    <dd>
-    <div class="title">
-    <span><img src="${contextPath}/resources/images/leftico02.png" /></span>用户管理
-    </div>
-    	<ul class="menuson">
-        	<li class="active"><cite></cite><a href="#">用户列表</a><i></i></li>
-       	</ul>     
-    </dd> 
+     
     
     
     </dl>
