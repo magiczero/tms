@@ -12,12 +12,14 @@
 <link href="${contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="${contextPath}/resources/css/treeview.css" rel="stylesheet" type="text/css" />
 <link href="${contextPath}/resources/css/select.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${contextPath}/resources/js/jquery.js"></script>
-<script type="text/javascript" src="${contextPath}/resources/js/jquery.treeview.js"></script>
+<link href="${contextPath}/resources/css/tip-darkgray/tip-darkgray.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/select-ui.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.poshytip.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.treeview.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	// third example
 	$("#grouptree").treeview({
 		animated: "fast",
 		collapsed: true,
@@ -30,7 +32,44 @@ $(document).ready(function(){
 	$(".select1").uedSelect({
 		width : 345			  
 	});
+	
+	$(":text").each(function(index, element) {
+
+	    $(element).poshytip({
+	    	className: 'tip-darkgray',
+	    	content: 'Hey, there! This is a tooltip.',
+	    	showOn: 'none',
+	    	alignTo: 'target',
+	    	alignX: 'inner-left',
+	    	offsetX: 0,
+	    	offsetY: 5,
+	    	showTimeout: 100
+	    });
+    });
+	
+	$("#group").validate({
+    	focusCleanup:true,//clear the error message when the error element get focus again. 
+    	onkeyup:false, 
+    	errorPlacement: function(error, element) { 
+    		
+    		showErrorMesssgeDiv(error,element); 
+    	},
+    	rules : {
+    		groupName : {required:true, maxlength:30},
+    		explain : {maxlength:50}
+    	},
+    	messages : {
+    		groupName : {required :"请输入部门名称", maxlength:"最多只能输入{0}个字"},
+    		explain : {maxlength:"最多只能输入{0}个字"}
+    	}
+    });
 });
+
+function showErrorMesssgeDiv(error,element){
+	element.poshytip('update',error);
+	element.poshytip('show');
+	element.poshytip('hideDelayed',5000);
+}
 </script>
 </head>
 

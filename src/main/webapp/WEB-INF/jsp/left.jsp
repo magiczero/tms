@@ -31,15 +31,15 @@ $(function(){
 </script>
 </head>
 <body style="background:#f0f9fd;">
-	<div class="lefttop"><span></span>通讯录</div>
+	<div class="lefttop"><span></span>项目列表</div>
     
     <dl class="leftmenu">
-        
+        <c:forEach items="${projectList }" var="project">
     <dd>
     <div class="title">
-    <span><img src="${contextPath}/resources/images/leftico01.png" /></span>管理信息
+    <span><img src="${contextPath}/resources/images/leftico01.png" /></span>${project.name }
     </div>
-    	<ul class="menuson">
+    	<ul id="projecttree" class="treeview-red">
         <li><cite></cite><a href="index.html" target="rightFrame">首页模版</a><i></i></li>
         <li class="active"><cite></cite><a href="right.html" target="rightFrame">数据列表</a><i></i></li>
         <li><cite></cite><a href="imgtable.html" target="rightFrame">图片数据表</a><i></i></li>
@@ -52,7 +52,7 @@ $(function(){
         <li><cite></cite><a href="error.html" target="rightFrame">404页面</a><i></i></li>
         </ul>    
     </dd>
-        
+        </c:forEach>
     
     <dd>
     <div class="title">

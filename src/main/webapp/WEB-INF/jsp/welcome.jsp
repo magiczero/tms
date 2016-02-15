@@ -36,18 +36,6 @@
     
     <div class="xline"></div>
     
-    <ul class="iconlist">
-    
-    <li><img src="images/ico01.png" /><p><a href="#">管理设置</a></p></li>
-    <li><img src="images/ico02.png" /><p><a href="#">发布文章</a></p></li>
-    <li><img src="images/ico03.png" /><p><a href="#">数据统计</a></p></li>
-    <li><img src="images/ico04.png" /><p><a href="#">文件上传</a></p></li>
-    <li><img src="images/ico05.png" /><p><a href="#">目录管理</a></p></li>
-    <li><img src="images/ico06.png" /><p><a href="#">查询</a></p></li> 
-            
-    </ul>
-    
-    <div class="ibox"><a class="ibtn"><img src="images/iadd.png" />添加新的快捷功能</a></div>
     
     <div class="xline"></div>
     <div class="box"></div>
