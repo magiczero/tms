@@ -1,6 +1,7 @@
 package com.yhp.tms.modal;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,6 +29,9 @@ public class Box implements Serializable {
 	
 	@Column(name="name", unique = true, nullable=false, length=50)
 	private String name;
+	
+	@Column(name="in_time")
+	private Date insertTime;	//创建时间
 
 	@Column(name="remark", nullable=true, length=200)
 	private String remark;
@@ -77,4 +81,13 @@ public class Box implements Serializable {
 	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
+	
+	public Date getInsertTime() {
+		return insertTime;
+	}
+
+	public void setInsertTime(Date insertTime) {
+		this.insertTime = insertTime;
+	}
+
 }

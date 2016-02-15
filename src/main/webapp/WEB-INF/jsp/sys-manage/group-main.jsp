@@ -198,11 +198,11 @@ function showErrorMesssgeDiv(error,element){
     <div class="dflist1">
     <div class="listtitle"><a href="#" class="more1">更多</a>信息统计</div>    
     <ul class="newlist">
-    <li><i>会员数：</a></i>2535462</li>
-    <li><i>文档数：</a></i>5546</li>
-    <li><i>普通文章：</a></i>2315</li>
-    <li><i>软件：</a></i>1585</li>
-    <li><i>评论数：</a></i>5342</li>    
+    <li><i>会员数：</i>2535462</li>
+    <li><i>文档数：</i>5546</li>
+    <li><i>普通文章：</i>2315</li>
+    <li><i>软件：</i>1585</li>
+    <li><i>评论数：</i>5342</li>    
     </ul>        
     </div>
     

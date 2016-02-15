@@ -40,8 +40,9 @@ public class SystemController {
 		String username = currentUser.getUsername();
 		
 		if("admin".equals(username)) {
-			model.addAttribute("projectList", projectService.getProjectAll());
+			model.addAttribute("boxList", boxService.getAllBox());
 		} else {
+			model.addAttribute("boxList", boxService.getAllBox());
 			User user = userService.getUserByUsername(username);
 			model.addAttribute("projectList", projectService.getAllProjectByUser(user));
 		}

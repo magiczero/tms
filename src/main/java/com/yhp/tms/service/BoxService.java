@@ -7,4 +7,6 @@ import com.yhp.tms.modal.Box;
 public interface BoxService {
 
 	List<Box> getAllBox();
+	
+	boolean saveBox(Box box);
 }

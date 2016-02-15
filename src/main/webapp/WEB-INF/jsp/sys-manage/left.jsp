@@ -54,7 +54,17 @@ $(function(){
         	<li><cite></cite><a href="${contextPath}/group/add" target="rightFrame">添加部门</a><i></i></li>
        	</ul>     
     </dd>
-        
+    
+     <dd>
+    <div class="title">
+    <span><img src="${contextPath}/resources/images/leftico02.png" /></span>BOX管理
+    </div>
+    	<ul class="menuson">
+        	<li><cite></cite><a href="${contextPath}/box/list" target="rightFrame">BOX列表</a><i></i></li>
+        	<li><cite></cite><a href="${contextPath}/box/add" target="rightFrame">添加BOX</a><i></i></li>
+       	</ul>     
+    </dd>
+        <!-- 
     <dd>
     <div class="title">
     <span><img src="${contextPath}/resources/images/leftico01.png" /></span>数据字典
@@ -72,7 +82,7 @@ $(function(){
         <li><cite></cite><a href="error.html" target="rightFrame">404页面</a><i></i></li>
         </ul>    
     </dd>
-        
+         -->
     
      
     

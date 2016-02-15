@@ -34,10 +34,10 @@ $(function(){
 	<div class="lefttop"><span></span>项目列表</div>
     
     <dl class="leftmenu">
-        <c:forEach items="${projectList }" var="project">
+        <c:forEach items="${boxList }" var="box">
     <dd>
     <div class="title">
-    <span><img src="${contextPath}/resources/images/leftico01.png" /></span>${project.name }
+    <span><img src="${contextPath}/resources/images/leftico01.png" /></span>${box.name }
     </div>
     	<ul id="projecttree" class="treeview-red">
         <li><cite></cite><a href="index.html" target="rightFrame">首页模版</a><i></i></li>
