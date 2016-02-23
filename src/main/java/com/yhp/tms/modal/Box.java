@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -37,6 +38,7 @@ public class Box implements Serializable {
 	private String remark;
 	
 	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE },mappedBy ="box")
+	@OrderBy(value="createTime desc")
 	private Set<Project> projects = new HashSet<Project>();
 	
 	@Column(name="del_mark")

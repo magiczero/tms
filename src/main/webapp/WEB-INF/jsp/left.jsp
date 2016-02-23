@@ -2,29 +2,25 @@
     pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 <link href="${contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${contextPath}/resources/js/jquery.js"></script>
+<link href="${contextPath}/resources/css/treeview.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.treeview.js"></script>
 
 <script type="text/javascript">
 $(function(){	
-	//导航切换
-	$(".menuson li").click(function(){
-		$(".menuson li.active").removeClass("active")
-		$(this).addClass("active");
-	});
-	
-	$('.title').click(function(){
-		var $ul = $(this).next('ul');
-		$('dd').find('ul').slideUp();
-		if($ul.is(':visible')){
-			$(this).next('ul').slideUp();
-		}else{
-			$(this).next('ul').slideDown();
+	$("#projecttree").treeview({
+		animated: "fast",
+		collapsed: true,
+		unique: true,
+		toggle: function() {
+			window.console && console.log("%o was toggled", this);
 		}
 	});
 })	
@@ -32,61 +28,65 @@ $(function(){
 </head>
 <body style="background:#f0f9fd;">
 	<div class="lefttop"><span></span>项目列表</div>
+    <ul id="projecttree" class="filetree">
+    <c:forEach items="${boxList }" var="box">
     
-    <dl class="leftmenu">
-        <c:forEach items="${boxList }" var="box">
-    <dd>
-    <div class="title">
-    <span><img src="${contextPath}/resources/images/leftico01.png" /></span>${box.name }
-    </div>
-    	<ul id="projecttree" class="treeview-red">
-        <li><cite></cite><a href="index.html" target="rightFrame">首页模版</a><i></i></li>
-        <li class="active"><cite></cite><a href="right.html" target="rightFrame">数据列表</a><i></i></li>
-        <li><cite></cite><a href="imgtable.html" target="rightFrame">图片数据表</a><i></i></li>
-        <li><cite></cite><a href="form.html" target="rightFrame">添加编辑</a><i></i></li>
-        <li><cite></cite><a href="imglist.html" target="rightFrame">图片列表</a><i></i></li>
-        <li><cite></cite><a href="imglist1.html" target="rightFrame">自定义</a><i></i></li>
-        <li><cite></cite><a href="tools.html" target="rightFrame">常用工具</a><i></i></li>
-        <li><cite></cite><a href="filelist.html" target="rightFrame">信息管理</a><i></i></li>
-        <li><cite></cite><a href="tab.html" target="rightFrame">Tab页</a><i></i></li>
-        <li><cite></cite><a href="error.html" target="rightFrame">404页面</a><i></i></li>
-        </ul>    
-    </dd>
-        </c:forEach>
-    
-    <dd>
-    <div class="title">
-    <span><img src="${contextPath}/resources/images/leftico02.png" /></span>其他设置
-    </div>
-    <ul class="menuson">
-        <li><cite></cite><a href="#">编辑内容</a><i></i></li>
-        <li><cite></cite><a href="#">发布信息</a><i></i></li>
-        <li><cite></cite><a href="#">档案列表显示</a><i></i></li>
-        </ul>     
-    </dd> 
-    
-    
-    <dd><div class="title"><span><img src="${contextPath}/resources/images/leftico03.png" /></span>编辑器</div>
-    <ul class="menuson">
-        <li><cite></cite><a href="#">自定义</a><i></i></li>
-        <li><cite></cite><a href="#">常用资料</a><i></i></li>
-        <li><cite></cite><a href="#">信息列表</a><i></i></li>
-        <li><cite></cite><a href="#">其他</a><i></i></li>
-    </ul>    
-    </dd>  
-    
-    
-    <dd><div class="title"><span><img src="${contextPath}/resources/images/leftico04.png" /></span>日期管理</div>
-    <ul class="menuson">
-        <li><cite></cite><a href="#">自定义</a><i></i></li>
-        <li><cite></cite><a href="#">常用资料</a><i></i></li>
-        <li><cite></cite><a href="#">信息列表</a><i></i></li>
-        <li><cite></cite><a href="#">其他</a><i></i></li>
-    </ul>
-    
-    </dd>   
-    
-    </dl>
+        <li><span class="folder">&nbsp;<a href="index.html" target="rightFrame">${box.name }</a></span>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <c:if test="${not empty box.projects }">
+        	<ul>
+        		<c:forEach items="${box.projects }" var="project">
+        		<li><span class="folder">&nbsp;&nbsp;<a href="index.html" target="rightFrame">${project.name }</a></span>
+        		<ul>
+        		<li><span class="folder">&nbsp;<a href="${contextPath }/scheme/list/${project.id }" target="rightFrame">试验方案设计</a></span>
+        		<c:if test="${not empty project.schemes }">
+        			<ul>
+        			<c:forEach items="${project.schemes }" var="scheme">
+        			<li><span class="file">&nbsp;<a href="index.html" target="rightFrame">${scheme.schemeName }</a></span>
+        			</li>
+        			</c:forEach>
+        			</ul>
+        			</c:if>
+        		</li>
+        		
+        		<li><span class="folder">&nbsp;<a href="index.html" target="rightFrame">试验数据管理</a></span>
+        		<c:if test="${not empty project.datas }">
+        			<ul>
+        			<c:forEach items="${project.datas }" var="testdata">
+        			<li><span class="file">&nbsp;<a href="index.html" target="rightFrame">${testdata.dataName }</a></span>
+        			</li>
+        			</c:forEach>
+        			</ul></c:if>
+        		</li>
+        		
+        		
+        		<li><span class="folder">&nbsp;<a href="index.html" target="rightFrame">可靠性评估</a></span>
+        		<c:if test="${not empty project.assessments }">
+        			<ul>
+        			<c:forEach items="${project.assessments }" var="assessment">
+        			<li><span class="file">&nbsp;<a href="index.html" target="rightFrame">${assessment.name }</a></span>
+        			</li>
+        			</c:forEach>
+        			</ul></c:if>
+        		</li>
+        		
+				</ul>
+        		</li>
+        		</c:forEach>
+        	</ul>
+        </c:if>
+        </sec:authorize>
+        <sec:authorize access="!hasRole('ROLE_ADMIN')">
+        <ul>
+        <c:forEach items="${projectList }" var="project1">
+        <c:if test="${project1.box.id == box.id }">
+        <li><span><a href="index.html" target="rightFrame">${project1.name }</a></span>
+        		</li></c:if>
+        </c:forEach></ul>
+        </sec:authorize>
+        </li>
+    </c:forEach>
+        </ul> 
     
 </body>
 </html>

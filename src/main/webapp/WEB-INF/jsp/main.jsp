@@ -14,7 +14,7 @@
   <frame src="${contextPath }/top" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />
   <frameset cols="187,*" frameborder="no" border="0" framespacing="0">
     <frame src="${contextPath }/left" name="leftFrame" scrolling="No" noresize="noresize" id="leftFrame" title="leftFrame" />
-    <frame src="${contextPath }/welcome" name="rightFrame" id="rightFrame" title="rightFrame" />
+    <frame src="${contextPath }/project/list" name="rightFrame" id="rightFrame" title="rightFrame" />
   </frameset>
 </frameset>
 <noframes><body>

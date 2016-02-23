@@ -45,7 +45,7 @@
     
     <span class="systemlogo"></span> 
     <div class="loginbox">
-    <form id="loginForm" name="loginForm" action="<%=basePath%>login" method="post">
+    <form id="loginForm" name="loginForm" action="<%=basePath%>manage" method="post">
     <ul>
     <li><input name="username" type="text" class="loginuser" /></li>
     <li><input name="password" type="password" class="loginpwd"/></li>

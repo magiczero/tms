@@ -40,4 +40,18 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		return projectDao.search(search);
 	}
+
+	@Override
+	@Transactional
+	public boolean saveProject(Project project) {
+		// TODO Auto-generated method stub
+		return projectDao.save(project);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Project getById(int projectid) {
+		// TODO Auto-generated method stub
+		return projectDao.find(projectid);
+	}
 }

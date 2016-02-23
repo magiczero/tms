@@ -19,10 +19,25 @@ $(function(){
 		$(this).addClass("selected");
 		if(this.textContent=="系统设置") {
 			window.parent.frames[1].location="${contextPath}/sys/left";
+		} else if(this.textContent=="工作台" || this.textContent=="常用工具") {
+			window.parent.frames[1].location="${contextPath}/left";
 		}
 	})	
+	
+	currentDate();
 })	
-
+/**获得当前日期**/
+		function  currentDate(){
+			var time = new Date();
+			var myYear = time.getFullYear();
+			var myMonth = time.getMonth()+1;
+			var myDay = time.getDate();
+			if(myMonth < 10){
+				myMonth = "0" + myMonth;
+			}
+			//document.getElementById("yue_fen").innerHTML =  myYear + "." + myMonth;
+			document.getElementById("day_day").innerHTML =  myYear + "." + myMonth + "." + myDay;
+		}
 </script>
 </head>
 <body style="background:url(<%=request.getContextPath() %>/resources/images/topbg.gif) repeat-x;">
@@ -32,18 +47,17 @@ $(function(){
     </div>
         
     <ul class="nav">
-    <li><a href="default.html" target="rightFrame" class="selected"><img src="${contextPath}/resources/images/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
+    <li><a href="${contextPath }/project/list" target="rightFrame" class="selected"><img src="${contextPath}/resources/images/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
     <li><a href="imgtable.html" target="rightFrame"><img src="${contextPath}/resources/images/icon02.png" title="模型管理" /><h2>模型管理</h2></a></li>
     <li><a href="imglist.html"  target="rightFrame"><img src="${contextPath}/resources/images/icon03.png" title="模块设计" /><h2>模块设计</h2></a></li>
-    <li><a href="tools.html"  target="rightFrame"><img src="${contextPath}/resources/images/icon04.png" title="常用工具" /><h2>常用工具</h2></a></li>
+    <li><a href="${contextPath}/tools"  target="rightFrame"><img src="${contextPath}/resources/images/icon04.png" title="常用工具" /><h2>常用工具</h2></a></li>
     <li><a href="computer.html" target="rightFrame"><img src="${contextPath}/resources/images/icon05.png" title="文件管理" onclick="abc();" /><h2>文件管理</h2></a></li>
     <li><a href="${contextPath}/user/list"  target="rightFrame"><img src="${contextPath}/resources/images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
     </ul>
             
     <div class="topright">    
     <ul>
-    <li><span><img src="${contextPath}/resources/images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
-    <li><a href="#">关于</a></li>
+    <li><a href="javascript:void(0);" id="day_day">关于</a></li>
     <li><a href="${contextPath }/logout" target="_parent">退出</a></li>
     </ul>
      

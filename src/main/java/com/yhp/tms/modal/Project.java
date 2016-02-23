@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -37,12 +38,15 @@ public class Project implements Serializable {
 	private String name;
 	
 	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE },mappedBy ="project")
+	@OrderBy(value="id desc")
 	private Set<Scheme> schemes = new HashSet<Scheme>();
 
 	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE },mappedBy ="project")
+	@OrderBy(value="id desc")
 	private Set<TestData> datas = new HashSet<TestData>();
 	
 	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE },mappedBy ="project")
+	@OrderBy(value="id desc")
 	private Set<Assessment> assessments = new HashSet<Assessment>();
 	
 	@Column(name="products_name", length=20)

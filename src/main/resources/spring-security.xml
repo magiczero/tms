@@ -18,7 +18,7 @@
 	  	<intercept-url pattern="/admin.jsp" access="hasRole('ROLE_ADMIN')" />
 	  	<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 	  	<form-login login-page="/jsp/login.jsp"
-	  			 login-processing-url="/login" 
+	  			 login-processing-url="/manage" 
 	  			 username-parameter="username" 
 	  			 password-parameter="password" 
 	  			 always-use-default-target="true" 

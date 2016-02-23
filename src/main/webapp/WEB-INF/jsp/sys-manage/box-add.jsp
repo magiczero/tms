@@ -34,9 +34,7 @@ $(document).ready(function() {
 	    		explain : {maxlength:"最多输入{0}个字"}
 	    	}
 	    });
-    $(".select1").uedSelect({
-		width : 345			  
-	});
+    
     
     $(":text").each(function(index, element) {
 

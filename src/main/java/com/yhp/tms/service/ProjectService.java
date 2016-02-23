@@ -10,4 +10,8 @@ public interface ProjectService {
 	List<Project> getProjectAll();
 	
 	List<Project> getAllProjectByUser(User user);
+
+	boolean saveProject(Project project);
+	
+	Project getById(int projectid);
 }
