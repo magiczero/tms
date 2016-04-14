@@ -18,10 +18,7 @@ $(function(){
 	$("#projecttree").treeview({
 		animated: "fast",
 		collapsed: true,
-		unique: true,
-		toggle: function() {
-			window.console && console.log("%o was toggled", this);
-		}
+		unique: true
 	});
 })	
 </script>
@@ -36,41 +33,37 @@ $(function(){
         <c:if test="${not empty box.projects }">
         	<ul>
         		<c:forEach items="${box.projects }" var="project">
-        		<li><span class="folder">&nbsp;&nbsp;<a href="index.html" target="rightFrame">${project.name }</a></span>
-        		<ul>
-        		<li><span class="folder">&nbsp;<a href="${contextPath }/scheme/list/${project.id }" target="rightFrame">试验方案设计</a></span>
-        		<c:if test="${not empty project.schemes }">
-        			<ul>
-        			<c:forEach items="${project.schemes }" var="scheme">
-        			<li><span class="file">&nbsp;<a href="index.html" target="rightFrame">${scheme.schemeName }</a></span>
-        			</li>
-        			</c:forEach>
-        			</ul>
-        			</c:if>
-        		</li>
-        		
-        		<li><span class="folder">&nbsp;<a href="index.html" target="rightFrame">试验数据管理</a></span>
-        		<c:if test="${not empty project.datas }">
-        			<ul>
-        			<c:forEach items="${project.datas }" var="testdata">
-        			<li><span class="file">&nbsp;<a href="index.html" target="rightFrame">${testdata.dataName }</a></span>
-        			</li>
-        			</c:forEach>
-        			</ul></c:if>
-        		</li>
-        		
-        		
-        		<li><span class="folder">&nbsp;<a href="index.html" target="rightFrame">可靠性评估</a></span>
-        		<c:if test="${not empty project.assessments }">
-        			<ul>
-        			<c:forEach items="${project.assessments }" var="assessment">
-        			<li><span class="file">&nbsp;<a href="index.html" target="rightFrame">${assessment.name }</a></span>
-        			</li>
-        			</c:forEach>
-        			</ul></c:if>
-        		</li>
-        		
-				</ul>
+        		<li><span class="folder">&nbsp;&nbsp;<a href="javascript:void(0);" target="rightFrame">${project.name }</a></span>
+	        		<ul>
+		        		<li><span class="folder">&nbsp;<a href="${contextPath }/scheme/list/${project.id }" target="rightFrame">试验方案设计</a></span>
+		        		<c:if test="${not empty project.schemes }">
+		        			<ul>
+		        			<c:forEach items="${project.schemes }" var="scheme">
+		        			<li><span class="file">&nbsp;<a href="index.html" target="rightFrame">${scheme.schemeName }</a></span>
+		        			</li>
+		        			</c:forEach>
+		        			</ul>
+		        			</c:if>
+		        		</li>
+		        		<li><span class="folder">&nbsp;<a href="${contextPath }/testdata/list/${project.id }" target="rightFrame">试验数据管理</a></span>
+		        		<c:if test="${not empty project.datas }">
+		        			<ul>
+		        			<c:forEach items="${project.datas }" var="testdata">
+		        			<li><span class="file">&nbsp;<a href="javascript:void(0);" target="rightFrame">${testdata.dataName }</a></span>
+		        			</li>
+		        			</c:forEach>
+		        			</ul></c:if>
+		        		</li>
+		        		<li><span class="folder">&nbsp;<a href="${contextPath }/assessment/list/${project.id }" target="rightFrame">可靠性评估</a></span>
+		        		<c:if test="${not empty project.assessments }">
+		        			<ul>
+		        			<c:forEach items="${project.assessments }" var="assessment">
+		        			<li><span class="file">&nbsp;<a href="javascript:void(0);" target="rightFrame">${assessment.name }</a></span>
+		        			</li>
+		        			</c:forEach>
+		        			</ul></c:if>
+		        		</li>
+					</ul>
         		</li>
         		</c:forEach>
         	</ul>

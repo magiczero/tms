@@ -90,6 +90,7 @@ function showErrorMesssgeDiv(error,element){
     // sel2 ===== 截尾方式     1、定时截尾     2、定数截尾     3、序贯截尾
     //
     function selectChange(sel1, sel2) {
+    	console.log(sel1+'+'+sel2);
     	var $txt1 = '';
 		var $txt2 = '';
 		var $txt3 = '';
@@ -158,8 +159,17 @@ function showErrorMesssgeDiv(error,element){
 				$('#useRiskTd').append($txt2);
 				$('#ratio').remove();
 				$('#ratioTd').append($txt3);
-			} else if(sel2 == 3){
-				alert('二项分布序贯未实现');
+			} else if(sel2 == 3){		//序贯截尾
+				$('#totalTimeLabelTd').html('');
+				$('#totalTimeTd').html('');
+				$('#lowerLimitTd').html('');
+				$('#lowerLimitTd').append($('<select id="lowerLimit" name="lowerLimit" class="valid"><option value="0.8">0.8</option><option value="0.85">0.85</option><option value="0.9">0.9</option><option value="0.91">0.91</option><option value="0.91">0.91</option><option value="0.92">0.92</option><option value="0.93">0.93</option><option value="0.94">0.94</option><option value="0.95">0.95</option><option value="0.96">0.96</option><option value="0.97">0.97</option><option value="0.98">0.98</option><option value="0.99">0.99</option><option value="0.995">0.995</option><option value="0.999">0.999</option><option value="0.9995">0.9995</option></select>'));
+				$('#producerRiskTd').html('');
+				$('#producerRiskTd').append($('<select id="producerRisk" name="producerRisk" class="valid"><option value="5">5</option><option value="10">10</option><option value="20">20</option><option value="30">30</option></select>'));
+				$('#useRiskTd').html('');
+				$('#useRiskTd').append($('<select id="useRisk" name="useRisk" class="valid"><option value="5">5</option><option value="10">10</option><option value="20">20</option><option value="30">30</option></select>'));
+				$('#ratioTd').html('');
+				$('#ratioTd').append($('<select id="ratio" name="ratio" class="valid"><option value="1.5">1.5</option><option value="1.75">1.75</option><option value="2.0">2.0</option><option value="3.0">3.0</option></select>'));
 			}
 		} else { alert('未实现此功能');}
     }
@@ -173,7 +183,7 @@ function showErrorMesssgeDiv(error,element){
     			buildZhishuDingshi();
     			
     		} else if($schemeType == 2) {		//定数截尾
-    			buildDingshu();
+    			buildZhishuDingshu();
     			
     		} else if($schemeType == 3) {		//序贯截尾
     			buildXuguan();
@@ -192,7 +202,154 @@ function showErrorMesssgeDiv(error,element){
     	}
     }
   
-  //指数分布定时截尾
+  //-------------------------指数定数------------------------------
+	function buildZhishuDingshu() {
+	  	//必填项
+		var $lowerLimit = $('#lowerLimit').val();
+		if($lowerLimit == '') {
+    		$('#lowerLimit').poshytip('update','请填写最低可接受值');
+    		$('#lowerLimit').poshytip('show');
+    		$('#lowerLimit').poshytip('hideDelayed',3000);
+    		
+    		$('#lowerLimit').focus();
+    		return false;
+    	} else if(isNaN($lowerLimit)) {
+    		$('#lowerLimit').poshytip('update','请填入数字');
+    		$('#lowerLimit').poshytip('show');
+    		$('#lowerLimit').poshytip('hideDelayed',3000);
+    		
+    		$('#lowerLimit').focus();
+    		return false;
+    	}
+		<%-- 可选项--%>
+    	var ratio = $('#ratio').val();		<%-- 鉴别比 --%>
+    	var productor = $('#producerRisk').val();	<%-- 生产方风险 --%>
+    	var user = $('#useRisk').val();			<%-- 使用方风险--%>
+    	var	trunc = $('#truncTime').val();		<%-- 截尾数 --%>
+    	
+    	var arr1 = ['5', '5.0', '10', '10.0'];
+    	var arr = ['1.5', '2', '2.0', '3', '3.0', '5', '5.0', '10', '10.0'];
+    	var arr2 = ['10', '2', '6', '3', '8', '5', '4', '15', '18', '19', '23', '41', '52', '55', '67'];
+    	
+    	<%-- 4种方法生成方案 --%>
+    	if(ratio!='' && productor!='' && user!='' && trunc=='') {
+    		<%-- 判断输入的数据是否正确 --%>
+    		if($.inArray(ratio, arr) == -1) {
+        		$('#ratio').poshytip('update','请填写1.5, 2, 3, 5, 10中的一个数');
+        		$('#ratio').poshytip('show');
+        		$('#ratio').poshytip('hideDelayed',3000);
+        		
+        		$('#ratio').focus();
+        		return false;
+        	} 
+    		if($.inArray(productor, arr1) == -1) {
+        		$('#producerRisk').poshytip('update','请填写 5, 10中的一个数');
+        		$('#producerRisk').poshytip('show');
+        		$('#producerRisk').poshytip('hideDelayed',3000);
+        		
+        		$('#producerRisk').focus();
+        		return false;
+        	} 
+    		if($.inArray(user, arr1) == -1) {
+        		$('#useRisk').poshytip('update','请填写 5, 10中的一个数');
+        		$('#useRisk').poshytip('show');
+        		$('#useRisk').poshytip('hideDelayed',3000);
+        		
+        		$('#useRisk').focus();
+        		return false;
+        	} 
+    		productor = productor / 100;
+        	user = user / 100;
+        	$.getJSON("${contextPath}/scheme-table/zhishu-dingshu/"+productor+"/"+user+"/"+ratio+"/end", function(data){
+    			if(data == null){
+					alert('未生成试验方案');
+				} else {
+					$('#dingshu tbody').empty();
+					var $tbody = '';
+					$.each(data, function (index, element) {
+						if(index%2 == 0) {
+							$tbody += '<tr class="odd">';
+						} else {
+							$tbody += '<tr>';
+						}
+						var panding = element.use2 * $lowerLimit;
+						$tbody += '<td>'+element.productor1*100+'%</td><td>'+element.use1*100+'%</td><td>'+element.diffRatio+'</td><td>???</td><td>'+panding+' h</td><td>'+element.productor2+'</td></tr>';
+					});
+					$('#dingshu tbody').html($tbody);
+				}
+    		});
+    	} else if(ratio=='' && productor!='' && user!='' && trunc=='') {
+    		if($.inArray(productor, arr1) == -1) {
+        		$('#save_selector_producerRisk').poshytip('update','请填写 5, 10中的一个数');
+        		$('#save_selector_producerRisk').poshytip('show');
+        		$('#save_selector_producerRisk').poshytip('hideDelayed',3000);
+        		
+        		$('#save_selector_producerRisk').focus();
+        		return false;
+        	} 
+    		if($.inArray(user, arr1) == -1) {
+        		$('#save_selector_useRisk').poshytip('update','请填写 5, 10中的一个数');
+        		$('#save_selector_useRisk').poshytip('show');
+        		$('#save_selector_useRisk').poshytip('hideDelayed',3000);
+        		
+        		$('#save_selector_useRisk').focus();
+        		return false;
+        	} 
+    		productor = productor / 100;
+        	user = user / 100;
+        	
+        	$.ajax({
+    			type:"POST",
+    			url:"../schemetable/getDingshu.action?productor="+productor+"&use="+user,
+    			dataType : "json",
+    			success:function(data){
+    				if(data == null){
+    					alert('未生成试验方案');
+    				} else {
+    					var data1 = eval(data);
+    					
+    					insertDingshu(data1, lower);
+    					
+    				}
+    			}
+    		});
+    	} else if(ratio=='' && productor=='' && user=='' && trunc!='') {
+    		$('#save_selector_truncTime').poshytip({
+    	    	className: 'tip-darkgray',
+    	    	content: 'Hey, there! This is a tooltip.',
+    	    	showOn: 'none',
+    	    	alignTo: 'target',
+    	    	alignX: 'inner-left',
+    	    	offsetX: 0,
+    	    	offsetY: 5,
+    	    	showTimeout: 100
+    	    });
+    		if($.inArray(trunc, arr2) == -1) {
+        		$('#save_selector_truncTime').poshytip('update','请填写 2,3,4,5,6,8,10,15,18,19,23,41,52,55,67中的一个数');
+        		$('#save_selector_truncTime').poshytip('show');
+        		$('#save_selector_truncTime').poshytip('hideDelayed',3000);
+        		
+        		$('#save_selector_truncTime').focus();
+        		return false;
+        	} 
+    		alert('第三种方法啊');
+    	} else if(ratio!='' && productor=='' && user=='' && trunc=='') {
+    		if($.inArray(ratio, arr) == -1) {
+        		$('#save_selector_ratio').poshytip('update','请填写1.5, 2, 3, 5, 10中的一个数');
+        		$('#save_selector_ratio').poshytip('show');
+        		$('#save_selector_ratio').poshytip('hideDelayed',3000);
+        		
+        		$('#save_selector_ratio').focus();
+        		return false;
+        	} 
+    		alert('第四种方法');
+    	} else {
+    		return false;
+    		alert('输入的条件不足或过多，请重新输入');
+    	}
+	}
+  
+  //-------------------------指数分布定时截尾-----------------------------
     function buildZhishuDingshi() {
     	var $totalTime = $('#totalTime').val();
     	var $lowerLimit = $('#lowerLimit').val();
@@ -280,7 +437,7 @@ function showErrorMesssgeDiv(error,element){
     			if(data == null){
 					alert('未生成试验方案');
 				} else {
-					console.log(data);
+					//console.log(data);
 					$('#dingshi tbody').empty();
 					var $tbody = '';
 					$.each(data, function (index, element) {
@@ -359,6 +516,7 @@ select {border-color: #a7b5bc #ced9df #ced9df #a7b5bc;
     border-style: solid;
     border-width: 1px;
     height:21px;
+    margin-left:4px;
     padding-left:4px;
     padding-right : 4px;}
 
@@ -423,7 +581,7 @@ padding:4px;
 		    <td class="tdtitle">
 		    	<form:label path="lowerLimit">最低可接受值</form:label>
 		    </td>
-		    <td>
+		    <td id="lowerLimitTd">
 		    	<form:input path="lowerLimit"/>
 			</td>
 	    </tr>

@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "test_data")
 public class TestData implements Serializable {
@@ -26,6 +28,7 @@ public class TestData implements Serializable {
 	@GeneratedValue
 	private Integer id;
 	
+	@NotEmpty(message="试验名称必须填写")
 	@Column(name="data_name", length=50, nullable=false)
 	private String dataName;
 	

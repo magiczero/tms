@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  * @author HP
  *	可靠性评估
@@ -29,6 +31,7 @@ public class Assessment implements Serializable {
 	@GeneratedValue
 	private Integer id;
 	
+	@NotBlank(message="名称必须填写")
 	@Column(name="name", length=50)
 	private String name;
 	

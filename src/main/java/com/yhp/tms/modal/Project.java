@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "project")
 public class Project implements Serializable {
@@ -34,6 +36,7 @@ public class Project implements Serializable {
 	@JoinColumn(name = "box_id")
 	private Box box;
 
+	@NotBlank(message="项目名称必须填写")
 	@Column(name="project_name", unique = true, nullable=false, length=100)
 	private String name;
 	

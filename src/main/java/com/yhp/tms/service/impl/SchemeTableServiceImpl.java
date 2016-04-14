@@ -52,4 +52,28 @@ public class SchemeTableServiceImpl implements SchemeTableService {
 		
 		return schemeTableDao.search(search);
 	}
+
+	@Override
+	public List<SchemeTable> getList(int type, Double productor, Double user,
+			Double diffratio, Integer truncation) {
+		// TODO Auto-generated method stub
+		Search search = new Search();
+		if(productor != null ) {
+			search.addFilterEqual("productor1", productor);
+		}
+		if(user != null) {
+			search.addFilterEqual("use1", user);
+		}
+		if(diffratio !=null) {
+			search.addFilterEqual("diffRatio", diffratio);
+		}
+		if(truncation !=null) {
+			search.addFilterEqual("productor2", truncation);
+		}
+		
+		search.addFilterEqual("type", type);
+		
+		return schemeTableDao.search(search);
+	}
+	
 }

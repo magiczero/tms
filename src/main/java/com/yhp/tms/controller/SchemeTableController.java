@@ -61,4 +61,13 @@ public class SchemeTableController {
 		return list;
 		//return map;
 	}
+	
+	@RequestMapping(value = "/zhishu-dingshu/{product}/{use}/{ratio}/end", method = RequestMethod.GET)
+	@ResponseBody
+	public List<SchemeTable> zhishudingshu(@PathVariable() double product,@PathVariable() double use,@PathVariable() double ratio) {
+		
+		return schTableService.getList(6, product, use, ratio, null);
+	}
+	
+	
 }
